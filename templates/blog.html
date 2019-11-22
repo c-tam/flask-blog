@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+<nav class="subnav">
+	<ul>
+		{% if not current_user.is_authenticated %}
+			<li><a href="{{ url_for("auth.login") }}">Login</a></li>
+		{% endif %}
+		{% if current_user.is_authenticated %}
+			<li><a href="{{ url_for("auth.logout") }}">Logout</a></li>
+			<li><a href="{{url_for("blog.add")}}">New Post</a></li>
+			<li><a href="{{ url_for("auth.newuser") }}">New User</a></li>
+			<li><a href="{{url_for("auth.edituser")}}">Edit Users</a></li>
+		{% endif %}
+	</ul>
+</nav>
+
+<div class="alert" id="alert" role="alert">
+	<p id="alert-text"></p>
+	<button type="button" id="alert-close" href="#" class="hide">&times;</a>
+</div>
+
+<div class="blog-container" id="blog-container">
+	<div class="tag-preview">
+		{% if tags %}
+			<p>Filter by tags</p>
+			<ul class=tags>
+			{% if _tags %}
+				<li><a href="{{ url_for("blog.posts") }}">Clear tag</a></li>
+			{% endif %}
+			{% for tag in tags %}
+				<li><a href="{{ url_for("blog.posts", tags=tag.tag, page=page) }}">{{tag.tag}}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No tags here...</p>
+		{% endif %}
+	</div>
+	{% if posts.items %}
+		{% for post in posts.items %}
+			<div class="post-preview">
+				{% if current_user.is_authenticated %}
+					<button type="button" class="deletepost" id="{{post.id}}">Delete</button>
+				{% endif %}
+					<a href="{{url_for("blog.post_title", title=post.title_)}}">
+					<h1>{{post.title}}</h1>
+					<h3>By {{post.author}} on {{post.date_posted.strftime("%d %B %Y")}}</h3>
+					<p>Post #{{post.id}}</p>
+				</a>
+			</div>
+		{% endfor %}
+	{% else %}
+		<p>No posts here...</p>
+	{% endif %}
+
+</div>
+{% if prev_url %}
+	<a class="blog-prev button" role="button" href="{{ prev_url }}">Newer Posts</a>
+{% endif %}
+{% if next_url %}
+	<a class="blog-next button" role="button" href="{{ next_url }}">Older Posts</a>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for("static", filename="blog.js")}}" id="scripts"></script>
+<script>
+	var blogUrl = "{{ url_for('blog.posts') }}";
+</script>
+{% endblock %}

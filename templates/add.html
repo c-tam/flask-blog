@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Add a Post{% endblock %}
+{% block content %}
+<nav class="subnav">
+        <ul><li><a href="{{ url_for("blog.posts") }}">Back</a></li></ul>
+</nav>
+<h1 class="subtitle">Submit a Post</h1>
+<p>Content is written in markdown. <a href="//www.markdownguide.org/" target="_blank">Markdown guide</a>.</p>
+
+<div class="alert" id="alert" role="alert">
+	<p id="alert-text"></p>
+	<button type="button" id="alert-close" href="#" class="hide">&times;</a>
+</div>
+
+<form name="addForm" id="addForm" method="POST" action="{{url_for("blog.addpost")}}">
+	<div class="form-item">
+		<label>Title</label>
+		<input type="text" name="title" class="form-input" id="title">
+	</div>
+	<div class="form-item">
+		<label>Author</label>
+		<input type="text" name="author" class="form-input" id="author">
+	</div>
+	<div class="form-item">
+		<label>Content</label>
+		<textarea rows="10" cols="50" class="form-input" name="content" id="content"></textarea>
+	</div>
+	<div class="form-item">
+		<label>Tags (seperate with enter)</label>
+		<div class="tag-container">
+			<input />  
+		</div>
+		
+	</div>
+	<div class="form-item">
+		<button type="submit" id="submit-post">Submit</button>
+	</div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for("static", filename="blog.js")}}" id="scripts"></script>
+{% endblock %}
+

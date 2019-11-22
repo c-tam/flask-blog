@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Edit Users{% endblock %}
+{% block content %}
+<nav class="subnav">
+        <ul><li><a href="{{ url_for("blog.posts") }}">Back</a></li></ul>
+</nav>  
+<h1 class="subtitle">Edit Users</h1>
+
+<div class="alert" id="alert" role="alert">
+	<p id="alert-text"></p>
+	<button type="button" id="alert-close" href="#" class="hide">&times;</a>
+</div>
+
+{% for user in users %}
+<div class="edituser-form">
+    <p>ID: {{user.id}}. Username: {{user.username}}</p>
+    <label>New password</label>
+    <input type="password" name="newpass" class="user-input" id="newpass{{user.id}}">
+    <button type="button" user_id="{{user.id}}" class="deleteuser">Delete User</button>
+    <button type="button" user_id="{{user.id}}" class="newpass">Change Password</button>
+</div>
+
+{% endfor %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for("static", filename="auth.js")}}" id="scripts"></script>
+{% endblock %}

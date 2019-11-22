@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="{{url_for("static", filename="base.css")}}">
+	<meta name="theme-color" content="#666699"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="{{
+		url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+	<script type=text/javascript>
+  		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<script>(function(a){a.className=a.className+="js"})(document.documentElement)</script>
+		<nav class="nav" role="navigation">
+			<a class="skip" role="button" href="#menu">
+				<div class="hamburger"></div>
+			</a>
+			<div class="title"><h1>Charles Tam</h1></div>
+			<ul>
+                <li><a href="{{ url_for("main.index") }}">Home</a></li>
+				<li><a href="{{ url_for("blog.posts") }}">Blog</a></li>
+				<li><a href="{{url_for("main.pinned") }}">Pinned</a></li>
+				<li><a href="{{ url_for("main.about") }}">About</a></li>
+			</ul>
+			<div class="darkmode">			
+				<input type="checkbox" name="schemeCheck" id="schemeCheck"/>
+				<label for="schemeCheck" id="schemeLabel" class="label">
+					<svg class="moonsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.09 10.58">
+						<path id ="moon" d="M5.3 0A5.3 5.3 0 0 0 0 5.3a5.3 5.3 0 0 0 5.3 5.28 5.3 5.3 0 0 0 4.8-3.08 4.23 4.23 0 0 1-2.7.97 4.23 4.23 0 0 1-4.23-4.24A4.23 4.23 0 0 1 6.41.13 5.3 5.3 0 0 0 5.3 0z"/>
+					</svg>
+				</label>
+			</div>
+		</nav>
+		<main role="main">
+			<article class="content" role="article" id="main-content">
+				{% block content %}{% endblock %}
+			</article>
+		</main>
+		<footer>
+			<p>&copy; Charles Tam 2019.</p>
+		</footer>
+	</div>
+	<script src="{{url_for("static", filename="script.js")}}" id="scripts"></script>
+	{% block scripts %}{% endblock %}
+</body>
+</html>

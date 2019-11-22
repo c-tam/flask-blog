@@ -1,0 +1,176 @@
+/* styles for index */
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+:root {
+    --font-col: #000000;
+    --bg-col: #f2f2f2;
+	--bg-bri: 1;
+	--nav-hover: #9494b8;
+}
+[data-theme="dark"] {
+    --font-col: #ffffff;
+    --bg-col: #000033;
+	--bg-bri: 0.6;
+	--nav-hover: #47476b;
+}
+[data-theme="light"]{
+    --font-col: #000000;
+    --bg-col: #f2f2f2;
+	--bg-bri: 1;
+	--nav-hover: #9494b8;
+}
+body {
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif; 
+	font-size: large;
+	color: var(--font-col);
+	background-color: var(--bg-col);
+}
+html, body {
+	height: 100%;
+}
+.wrapper {
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
+}
+.centre {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+main {
+	padding-bottom: 3em;
+	margin: 0 auto;
+}
+footer {
+	background-color: #666699;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 3em; 
+}
+footer p {
+	margin: 0;
+	line-height: 3em;
+}
+.nav ul {
+	list-style-type: none;
+}
+.nav {
+	height: 12em;
+	white-space: nowrap;
+}
+.title {
+	width: 100%;
+	text-align: center;
+	height: 3em;
+	line-height: 3em;
+	padding: 0;
+	font-size: xx-large;
+}
+.nav {
+	display: flex;
+	align-items: baseline;
+}
+.nav ul {
+	max-height: 20em;
+	position: absolute;
+}
+nav li {
+	text-align: left;
+
+}
+nav li:hover {
+	background-color: var(--nav-hover);
+}
+nav li a {
+	padding: 0 2em;
+	height: 3em;
+	line-height: 3em;
+	display: block;
+    text-align: center;
+	text-decoration: none;
+	color: var(--font-col);
+}
+.content {
+	width: 100%;
+	height: 10em;
+	margin: 0 auto;
+}
+.content p {
+	margin: 3em;
+}
+footer {
+	text-align: center;
+}
+input[type=checkbox]#schemeCheck {
+	position:absolute;
+	z-index:-1000;
+	left:-1000px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	height:1px;
+	width:1px;
+	margin:-1px;
+	padding:0;
+	border:0;
+}
+.moonsvg {
+	height: 1.5em;
+	width: 1.5em;
+}
+input[type=checkbox]#schemeCheck + label.label #moon{
+	display:inline-block;
+	vertical-align:middle;
+	cursor:pointer;
+	fill: black; 
+}
+input[type=checkbox]#schemeCheck:checked + label.label #moon {
+	fill: white; 
+}
+label.label {
+	user-select: none;
+}
+.darkmode {
+	position:absolute;
+	height: 3em;
+	width: 3em;
+	top: 0;
+	right: 0;
+}
+.darkmode:hover {
+	background-color: var(--nav-hover);
+}
+/* desktop styling*/
+@media screen and (min-width: 50em) {
+	.wrapper {
+		position: relative;
+	}
+	.nav ul {
+		overflow: auto;
+		max-height: inherit; 
+		position: static;
+		display: flex;
+		justify-content: flex-start;
+		background-color: transparent;
+		width: auto;
+	}
+	.nav {
+		width: auto;
+		margin: 0 auto;
+	}
+	.nav li{
+		text-align: center;
+		display: inline-block;
+	}
+	.content {
+		width: 50em;
+		margin: 0 auto;
+	}
+	.title {
+		width: auto;
+	}
+}
